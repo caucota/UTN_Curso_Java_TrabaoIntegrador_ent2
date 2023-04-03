@@ -1,6 +1,7 @@
 package org.caucotafederico.TrabajoIntegrador_ent2;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,14 @@ import org.caucotafederico.models.Apuesta;
 import org.caucotafederico.models.Pronostico;
 import org.caucotafederico.models.Resultado;
 import org.junit.Test;
-//import org.junit.jupiter.api.Test;
 
 
-class AppTestPronosticos {
+public class AppTestPronosticos {
 
+	@Test
+	public void pruebaz() {
+		assertTrue(false);
+	}
 
 	@Test
 	public void test_pronostico_CalcularPuntosDeUnApostadorEnDosRondas() {
