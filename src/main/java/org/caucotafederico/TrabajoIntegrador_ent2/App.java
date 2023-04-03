@@ -1,10 +1,4 @@
 package org.caucotafederico.TrabajoIntegrador_ent2;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -59,72 +53,7 @@ public class App
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
-        
-        /*
-        try {
-			listadoResultados = new CsvToBeanBuilder(new FileReader(archivoResultados))
-					.withType(Resultado.class)
-					.build()
-					.parse();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		*/
-        /*
-    	    try (Reader reader = Files.newBufferedReader(Paths.get(archivoResultados))) {
-    	        try (CSVReader csvReader = new CSVReader(reader)) {
-    	            String[] lineaLeida;
-    	            int nroLinea = 0;
-    	            while ((lineaLeida = csvReader.readNext()) != null) {
-    	            	nroLinea++;
-    	            	if(lineaLeida.length != 5) {
-    	            		System.out.println("Error: El archivo resultados.csv sólo puede tener 5 columnas: Ronda - Equipo1 - Goles Equipo1 - Goles Equipo2 - Equipo2. Cantidad actual de columnas " + lineaLeida.length + " en el renglón " + nroLinea  );
-    	            		System.exit(88);
-    	            	};
-    	            	if(!isInteger(lineaLeida[0])) {
-    	            		System.out.println("Error: En el archivo resultados.csv la columna 1, Nro. de Ronda, debe contener un valor numérico. Ver la linea " + nroLinea + " contiene el siguiente valor: " + lineaLeida[0]);
-    	            		System.exit(88);
-    	            	}
-    	            	if(!isInteger(lineaLeida[2])) {
-    	            		System.out.println("Error: En el archivo resultados.csv la columna 3, Goles Local, debe contener un valor numérico. Ver la linea " + nroLinea + " contiene el siguiente valor: " + lineaLeida[2]);
-    	            		System.exit(88);
-    	            	}
-    	            	if(!isInteger(lineaLeida[3])) {
-    	            		System.out.println("Error: En el archivo resultados.csv la columna 4, Goles Visitante, debe contener un valor numérico. Ver la linea " + nroLinea + " contiene el siguiente valor: " + lineaLeida[3]);
-    	            		System.exit(88);
-    	            	}
-    	            	unResultado = new Resultado();
-    	            	unResultado.setRonda(Integer.parseInt(lineaLeida[0]));
-    	            	unResultado.setEquipo1(lineaLeida[1]);
-    	            	unResultado.setGolesEquipo1(Integer.parseInt(lineaLeida[2]));
-    	            	unResultado.setGolesEquipo2(Integer.parseInt(lineaLeida[3]));
-    	            	unResultado.setEquipo2(lineaLeida[4]);
-    	            	
-    	            	listadoResultados.add(unResultado);
-    	        	    //System.out.println(lineaLeida.length);
-    	            }
-    	        }
-    	    }
-    	   catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        
-        try {
-        	listadoPronosticos = new CsvToBeanBuilder(new FileReader(archivoPronostico))
-					.withType(Pronostico.class)
-					.build()
-					.parse();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-        //System.out.println("Puntaje Total de todos los Apostadores: " + calcularPuntaje(listadoPronosticos, listadoResultados));
-        verResultadosPorApostadoryRonda(listadoPronosticos, listadoResultados);
-        */
+
        
     }
     

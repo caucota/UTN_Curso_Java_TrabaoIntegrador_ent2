@@ -227,7 +227,7 @@ public class Apuesta {
     	Integer puntosAcumulados = 0;
     	HashMap<String, Integer> apostadores_HashMap = new HashMap<String, Integer>();
     	
-    	try {
+    	//try {
     		armarListadoResultados(rutaResultados);
     		armarListadoPronosticos(rutaPronosticos);
 			validarListadosArmados();
@@ -276,17 +276,16 @@ public class Apuesta {
 	
 	        System.out.println(new_Map.getKey() + " = "
 	                           + new_Map.getValue());
-	    	}    	
+	    	}  
+	    	/*
 		} catch (FaltaListadoException e) {
 			System.out.println(e.getMensaje());
-			System.exit(88);
 		} catch (NroColumnasInvalidoException e) {
 			System.out.println(e.getMensaje());
-			System.exit(88);
 		} catch (NroNoEnteroException e) {
 			System.out.println(e.getMensaje());
-			System.exit(88);
 		}
+		*/
     	
     	//System.out.println(apostadores_HashMap);
     	return puntos;
