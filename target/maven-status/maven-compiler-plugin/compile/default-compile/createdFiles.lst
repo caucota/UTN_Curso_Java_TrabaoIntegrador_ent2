@@ -1,0 +1,8 @@
+org\caucotafederico\TrabajoIntegrador_ent2\App.class
+org\caucotafederico\exceptions\FaltaListadoException.class
+org\caucotafederico\models\Pronostico.class
+org\caucotafederico\exceptions\NroNoEnteroException.class
+org\caucotafederico\models\Apostador.class
+org\caucotafederico\models\Apuesta.class
+org\caucotafederico\models\Resultado.class
+org\caucotafederico\exceptions\NroColumnasInvalidoException.class

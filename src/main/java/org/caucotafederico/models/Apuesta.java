@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -77,6 +78,9 @@ public class Apuesta {
 	            int nroLinea = 0;
 	            while ((lineaLeida = csvReader.readNext()) != null) {
 	            	nroLinea++;
+	            	if (nroLinea == 1) {
+	            		continue;
+	            	}
 	            	if(lineaLeida.length != 5) {
 	            		throw new NroColumnasInvalidoException(lineaLeida.length , nroLinea);
 	            	};
@@ -108,7 +112,8 @@ public class Apuesta {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private void armarListadoPronosticos(String rutaPronosticos ) throws Exception{
         try {
-        	this.listadoPronosticos = new CsvToBeanBuilder(new FileReader(rutaPronosticos))
+        	this.listadoPronosticos = new CsvToBeanBuilder(new FileReader(rutaPronosticos, StandardCharsets.UTF_8))
+        			.withSkipLines(1)
 					.withType(Pronostico.class)
 					.build()
 					.parse();
