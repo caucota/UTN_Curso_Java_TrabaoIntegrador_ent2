@@ -14,17 +14,12 @@ import org.caucotafederico.models.Apuesta;
 import org.caucotafederico.models.Pronostico;
 import org.caucotafederico.models.Resultado;
 
-import com.opencsv.CSVReader;
-import com.opencsv.bean.CsvToBeanBuilder;
 
 
 public class App 
 {
     public static void main( String[] args )
     {
-        List<Resultado> listadoResultados = new ArrayList<>();
-        List<Pronostico> listadoPronosticos = null;
-        Resultado unResultado = null;
         Apuesta apuestaProde = new Apuesta();
         String archivoResultados = "C:\\Users\\fcaucota\\eclipse-workspace\\TrabajoIntegrador_ent2\\src\\resources\\resultados.csv";
         String archivoPronostico = "C:\\Users\\fcaucota\\eclipse-workspace\\TrabajoIntegrador_ent2\\src\\resources\\pronostico.csv";
@@ -203,7 +198,7 @@ public class App
             return false;
         }
         try {
-            int d = Integer.parseInt(strNum);
+            Integer.parseInt(strNum);
         } catch (NumberFormatException nfe) {
             return false;
         }

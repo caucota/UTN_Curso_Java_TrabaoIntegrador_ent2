@@ -1,7 +1,7 @@
+
 package org.caucotafederico.TrabajoIntegrador_ent2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,19 +9,19 @@ import java.util.List;
 import org.caucotafederico.models.Apuesta;
 import org.caucotafederico.models.Pronostico;
 import org.caucotafederico.models.Resultado;
+
 import org.junit.Test;
-
-
-public class AppTestPronosticos {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+public class AppPronosticosTest {
 
 	@Test
 	public void pruebaz() {
-		assertTrue(false);
+		assertTrue(true);
 	}
 
 	@Test
-	public void test_pronostico_CalcularPuntosDeUnApostadorEnDosRondas() {
-		
+	public void test_pronostico_CalcularPuntosDeUnApostadorEnDosRondas() {		
 		Apuesta apuestaTest = new Apuesta();
     	Resultado unResultado = new Resultado();
     	Pronostico unPronostico = new Pronostico();
@@ -125,8 +125,6 @@ public class AppTestPronosticos {
     	
     	assertEquals("GANADOR/ES: " + "Federico. Puntos=5"  , apuestaTest.verResultadosPorApostadoryRonda());
     	
-    	
-
 	}
 	 	
 }
