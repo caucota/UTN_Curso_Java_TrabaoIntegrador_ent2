@@ -133,6 +133,7 @@ public class AppPronosticosTest {
         
         try {
         	apuestaProde.armarListadosResultadosYPronostico(archivoResultados, archivoPronostico);
+            assertEquals(4, apuestaProde.totalPuntosUnApostador("Mariana"));
         } catch (NroColumnasInvalidoException e) {
         	System.out.println(e.getMensaje());
         } catch (NroNoEnteroException e) {
@@ -143,9 +144,6 @@ public class AppPronosticosTest {
 			e2.printStackTrace();
 		}
 		
-		
-		Apostador unApostadorTest = new Apostador("Mariana");
-		unApostadorTest.
 		
 		
 	}
