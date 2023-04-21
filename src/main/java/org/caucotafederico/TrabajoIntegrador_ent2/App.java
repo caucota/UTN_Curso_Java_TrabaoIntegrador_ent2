@@ -21,8 +21,8 @@ public class App
     public static void main( String[] args )
     {
         Apuesta apuestaProde = new Apuesta();
-        String archivoResultados = "C:\\Users\\fcaucota\\eclipse-workspace\\TrabajoIntegrador_ent2\\src\\resources\\resultados.csv";
-        String archivoPronostico = "C:\\Users\\fcaucota\\eclipse-workspace\\TrabajoIntegrador_ent2\\src\\resources\\pronostico.csv";
+        String archivoResultados = "src\\resources\\resultados.csv";
+        String archivoPronostico = "src\\resources\\pronostico.csv";
         
         
         if(args.length == 0) {

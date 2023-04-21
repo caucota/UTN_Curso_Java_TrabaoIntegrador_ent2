@@ -6,6 +6,10 @@ package org.caucotafederico.TrabajoIntegrador_ent2;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.caucotafederico.exceptions.FaltaListadoException;
+import org.caucotafederico.exceptions.NroColumnasInvalidoException;
+import org.caucotafederico.exceptions.NroNoEnteroException;
+import org.caucotafederico.models.Apostador;
 import org.caucotafederico.models.Apuesta;
 import org.caucotafederico.models.Pronostico;
 import org.caucotafederico.models.Resultado;
@@ -16,115 +20,135 @@ import static org.junit.Assert.assertTrue;
 public class AppPronosticosTest {
 
 	@Test
-	public void pruebaz() {
-		assertTrue(true);
-	}
-
+	public void test_GetEquipoGanadorDeUnResultado(){
+		Resultado resultadoUnPartido = new Resultado();
+		resultadoUnPartido.setEquipo1("Argentina");
+		resultadoUnPartido.setEquipo2("Bolivia");
+		resultadoUnPartido.setGolesEquipo1(1);
+		resultadoUnPartido.setGolesEquipo2(2);
+		
+		assertEquals("Argentina", resultadoUnPartido.EquipoGanador());
+				
+	}	
+	
 	@Test
-	public void test_pronostico_CalcularPuntosDeUnApostadorEnDosRondas() {		
-		Apuesta apuestaTest = new Apuesta();
-    	Resultado unResultado = new Resultado();
-    	Pronostico unPronostico = new Pronostico();
-    	List<Resultado> listadoResultados = new ArrayList<>();
-    	List<Pronostico> listadoPronosticos = new ArrayList<>();
-    	String[] equipo =  new String[] {"Argentina", "Grecia", "Uruguay", "Paraguay", "Italia", "España"};
-    	
-    	unResultado.setRonda(1);
-    	unResultado.setEquipo1(equipo[0]);
-    	unResultado.setGolesEquipo1(1);
-    	unResultado.setGolesEquipo2(0);
-    	unResultado.setEquipo2(equipo[1]);
-    	listadoResultados.add(unResultado);		
-    	
-    	unResultado.setRonda(1);
-    	unResultado.setEquipo1(equipo[2]);
-    	unResultado.setGolesEquipo1(0);
-    	unResultado.setGolesEquipo2(0);
-    	unResultado.setEquipo2(equipo[3]);
-    	listadoResultados.add(unResultado);		
-    	
-    	unResultado.setRonda(1);
-    	unResultado.setEquipo1(equipo[4]);
-    	unResultado.setGolesEquipo1(0);
-    	unResultado.setGolesEquipo2(4);
-    	unResultado.setEquipo2(equipo[5]);
-    	listadoResultados.add(unResultado);	
-    	
-    	unResultado.setRonda(2);
-    	unResultado.setEquipo1(equipo[0]);
-    	unResultado.setGolesEquipo1(0);
-    	unResultado.setGolesEquipo2(0);
-    	unResultado.setEquipo2(equipo[2]);
-    	listadoResultados.add(unResultado);		
-    	
-    	unResultado.setRonda(2);
-    	unResultado.setEquipo1(equipo[4]);
-    	unResultado.setGolesEquipo1(1);
-    	unResultado.setGolesEquipo2(0);
-    	unResultado.setEquipo2(equipo[3]);
-    	listadoResultados.add(unResultado);		
-    	
-    	unResultado.setRonda(1);
-    	unResultado.setEquipo1(equipo[1]);
-    	unResultado.setGolesEquipo1(1);
-    	unResultado.setGolesEquipo2(0);
-    	unResultado.setEquipo2(equipo[5]);
-    	listadoResultados.add(unResultado);	
-    	
-    	apuestaTest.setListadoResultados(listadoResultados);
-    	
-    	unPronostico.setApostador("Federico");
-    	unPronostico.setEquipo1(equipo[0]);
-    	unPronostico.setEquipo2(equipo[1]);
-    	unPronostico.setGanaLocal("X");
-    	unPronostico.setEmpate("");
-    	unPronostico.setGanaVisitante("");
-    	listadoPronosticos.add(unPronostico);
-    	
-    	unPronostico.setApostador("Federico");
-    	unPronostico.setEquipo1(equipo[2]);
-    	unPronostico.setEquipo2(equipo[3]);
-    	unPronostico.setGanaLocal("");
-    	unPronostico.setEmpate("X");
-    	unPronostico.setGanaVisitante("");
-    	listadoPronosticos.add(unPronostico);
-    	
-    	unPronostico.setApostador("Federico");
-    	unPronostico.setEquipo1(equipo[4]);
-    	unPronostico.setEquipo2(equipo[5]);
-    	unPronostico.setGanaLocal("");
-    	unPronostico.setEmpate("");
-    	unPronostico.setGanaVisitante("X");
-    	listadoPronosticos.add(unPronostico);
-    	
-    	unPronostico.setApostador("Federico");
-    	unPronostico.setEquipo1(equipo[0]);
-    	unPronostico.setEquipo2(equipo[2]);
-    	unPronostico.setGanaLocal("");
-    	unPronostico.setEmpate("");
-    	unPronostico.setGanaVisitante("X");
-    	listadoPronosticos.add(unPronostico);
-    	
-    	unPronostico.setApostador("Federico");
-    	unPronostico.setEquipo1(equipo[4]);
-    	unPronostico.setEquipo2(equipo[3]);
-    	unPronostico.setGanaLocal("X");
-    	unPronostico.setEmpate("");
-    	unPronostico.setGanaVisitante("");
-    	listadoPronosticos.add(unPronostico);
-    	
-    	unPronostico.setApostador("Federico");
-    	unPronostico.setEquipo1(equipo[1]);
-    	unPronostico.setEquipo2(equipo[5]);
-    	unPronostico.setGanaLocal("");
-    	unPronostico.setEmpate("X");
-    	unPronostico.setGanaVisitante("");
-    	listadoPronosticos.add(unPronostico);
-    	
-    	apuestaTest.setListadoPronosticos(listadoPronosticos);
-    	
-    	assertEquals("GANADOR/ES: " + "Federico. Puntos=5"  , apuestaTest.verResultadosPorApostadoryRonda());
-    	
+	public void test_GetEquipoGandadorDeUnaApuesta(){
+		Pronostico pronosticoUnPartido = new Pronostico();
+		pronosticoUnPartido.setEquipo1("Argentina");
+		pronosticoUnPartido.setEquipo2("Bolivia");
+		pronosticoUnPartido.setGanaLocal("");
+		pronosticoUnPartido.setEmpate("X");
+		pronosticoUnPartido.setGanaVisitante("");
+		
+		assertEquals("EMPATE", pronosticoUnPartido.EquipoGanador());
+				
 	}
-	 	
+	
+	@Test
+	public void test_GetPuntosDeUnPronosticoDeUnPartido() {
+		Pronostico pronosticoUnPartido = new Pronostico();
+		pronosticoUnPartido.setEquipo1("Brasil");
+		pronosticoUnPartido.setEquipo2("España");
+		pronosticoUnPartido.setGanaLocal("");
+		pronosticoUnPartido.setEmpate("X");
+		pronosticoUnPartido.setGanaVisitante("");
+		
+		Resultado resultadoUnPartido = new Resultado();
+		resultadoUnPartido.setEquipo1("Brasil");
+		resultadoUnPartido.setEquipo2("España");
+		resultadoUnPartido.setGolesEquipo1(2);
+		resultadoUnPartido.setGolesEquipo2(2);
+
+		assertEquals(1, pronosticoUnPartido.puntosObtenidosDelPartido(resultadoUnPartido));
+		
+	}
+	
+	@Test
+	public void test_CalcularTotalPuntosUnApostadorEnTodasRondas() {
+		List<Resultado> listaResultados = new ArrayList<>();
+		Resultado unResultado = new Resultado();
+		unResultado.setRonda(1);
+		unResultado.setEquipo1("Peru");
+		unResultado.setEquipo2("Alemania");
+		unResultado.setGolesEquipo1(1);
+		unResultado.setGolesEquipo2(2);
+		listaResultados.add(unResultado);
+		
+		unResultado = new Resultado();
+		unResultado.setRonda(1);
+		unResultado.setEquipo1("Chile");
+		unResultado.setEquipo2("Uruguay");
+		unResultado.setGolesEquipo1(1);
+		unResultado.setGolesEquipo2(2);
+		listaResultados.add(unResultado);
+		
+		unResultado = new Resultado();
+		unResultado.setRonda(2);
+		unResultado.setEquipo1("Uruguay");
+		unResultado.setEquipo2("Alemania");
+		unResultado.setGolesEquipo1(2);
+		unResultado.setGolesEquipo2(2);
+		listaResultados.add(unResultado);
+		
+		
+		List<Pronostico> listaPronosticos = new ArrayList<>();
+		Pronostico unPronostico = new Pronostico();
+		unPronostico.setApostador("Juan");
+		unPronostico.setEquipo1("Peru");
+		unPronostico.setEquipo2("Alemania");
+		unPronostico.setGanaLocal("");
+		unPronostico.setEmpate("X");
+		unPronostico.setGanaVisitante("");
+		listaPronosticos.add(unPronostico);
+		
+		
+		unPronostico = new Pronostico();
+		unPronostico.setApostador("Juan");
+		unPronostico.setEquipo1("Chile");
+		unPronostico.setEquipo2("Uruguay");
+		unPronostico.setGanaLocal("");
+		unPronostico.setEmpate("");
+		unPronostico.setGanaVisitante("X");
+		listaPronosticos.add(unPronostico);
+		
+		unPronostico = new Pronostico();
+		unPronostico.setApostador("Juan");
+		unPronostico.setEquipo1("Uruguay");
+		unPronostico.setEquipo2("Alemania");
+		unPronostico.setGanaLocal("");
+		unPronostico.setEmpate("X");
+		unPronostico.setGanaVisitante("");
+		listaPronosticos.add(unPronostico);
+		
+		
+		
+        Apuesta apuestaProde = new Apuesta();
+        apuestaProde.setListadoResultados(listaResultados);
+        apuestaProde.setListadoPronosticos(listaPronosticos);
+        
+        
+        
+        String archivoResultados = "src\\resources\\resultados.csv";
+        String archivoPronostico = "src\\resources\\pronostico.csv";
+        
+        try {
+        	apuestaProde.armarListadosResultadosYPronostico(archivoResultados, archivoPronostico);
+        } catch (NroColumnasInvalidoException e) {
+        	System.out.println(e.getMensaje());
+        } catch (NroNoEnteroException e) {
+        	System.out.println(e.getMensaje());
+        } catch (FaltaListadoException e) {
+        	System.out.println(e.getMensaje());
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		
+		
+		Apostador unApostadorTest = new Apostador("Mariana");
+		unApostadorTest.
+		
+		
+	}
+	
+	
 }

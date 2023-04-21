@@ -102,4 +102,28 @@ public class Pronostico {
 		this.equipo2 = equipo2;
 	}
 
+	public String EquipoGanador() {
+		String equipo = "";
+		if (this.getGanaLocal().equalsIgnoreCase("X")) {
+			equipo = this.getEquipo1();
+		} else {
+			if (this.getGanaVisitante().equalsIgnoreCase("X")) {
+				equipo = this.getEquipo2();
+			}else {
+				equipo = "EMPATE";
+			}
+		}
+		return equipo; 
+	}
+	
+	public int puntosObtenidosDelPartido(Resultado unResultado) {
+		int puntos = 0;
+		if (this.equipo1.equalsIgnoreCase(unResultado.getEquipo1()) && this.equipo2.equalsIgnoreCase(unResultado.getEquipo2())) {
+			if (this.EquipoGanador().equalsIgnoreCase(unResultado.EquipoGanador())) {
+				puntos ++;
+			}
+			
+		}
+		return puntos;
+	}
 }

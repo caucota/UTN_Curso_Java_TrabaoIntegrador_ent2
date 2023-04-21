@@ -81,10 +81,10 @@ public class Apuesta {
 	            	if (nroLinea == 1) {
 	            		continue;
 	            	}
-	            	if(lineaLeida.length != 5) {
+	            	if(lineaLeida.length != 5) { /// controlamos cantidad de columnas
 	            		throw new NroColumnasInvalidoException(lineaLeida.length , nroLinea);
 	            	};
-	            	if(!isInteger(lineaLeida[0])) {
+	            	if(!isInteger(lineaLeida[0])) { 
 	            		throw new NroNoEnteroException(1, "Nro. de Ronda", nroLinea, lineaLeida[0]);
 	            	}
 	            	if(!isInteger(lineaLeida[2])) {
@@ -126,11 +126,8 @@ public class Apuesta {
     }
     
     //public void verResultadosPorApostadoryRonda(String rutaResultados, String rutaPronosticos) throws Exception  {
-    public String verResultadosPorApostadoryRonda()  {
-    	String resultadoApuesta = "";
+    public void verResultadosPorApostadoryRonda()  {
     	try {
-    		//armarListadoResultados(rutaResultados);
-    		//armarListadoPronosticos(rutaPronosticos);
 			validarListadosArmados();
 			
 	    	HashMap<String, Apostador> apostadoresRondas = new HashMap<String, Apostador>();
@@ -138,13 +135,15 @@ public class Apuesta {
 	    	HashSet<String> nombreGanadores = new HashSet<String>();
 	    	int puntosGanador = 0;
 	    	
-	    	int unPronostico = -1;
-	    	int difGoles = 0;
+	    	//int unPronostico = -1;
+	    	//int difGoles = 0;
 	    	Integer puntosRonda = 0;
 	    	HashMap<Integer, Integer> rondaApostador = new HashMap<Integer, Integer>();
 	    	
 	    	for(Resultado resultadoPartido : this.listadoResultados) {
-				difGoles = resultadoPartido.getGolesEquipo1() - resultadoPartido.getGolesEquipo2();
+	    		
+				//difGoles = resultadoPartido.getGolesEquipo1() - resultadoPartido.getGolesEquipo2();
+				
 	    		for(Pronostico pron : this.listadoPronosticos) {
 	    			
 	        		unApostador = apostadoresRondas.get(pron.getApostador());
@@ -156,29 +155,7 @@ public class Apuesta {
 	        		if (puntosRonda == null) {
 	        			puntosRonda = 0;
 	        		}
-	        				
-	    			//System.out.println(pron.getEquipo1().toUpperCase().trim() + " - " + resultadoPartido.getEquipo1().toUpperCase().trim());
-	    			//System.out.println(pron.getEquipo2().toUpperCase().trim() + " - " + resultadoPartido.getEquipo2().toUpperCase().trim());
-	    			if(pron.getEquipo1().toUpperCase().trim().equals(resultadoPartido.getEquipo1().toUpperCase().trim()) && 
-	    			   pron.getEquipo2().toUpperCase().trim().equals(resultadoPartido.getEquipo2().toUpperCase().trim())) {
-	    				
-	    				
-	    				if(pron.getGanaLocal().toUpperCase().equals("X")) {
-	    					unPronostico = 1;
-	    	        	}else {
-	    	            	if(pron.getGanaVisitante().toUpperCase().equals("X")) {
-	    	            		unPronostico = 2;
-	    	            	}else {
-	    	            		unPronostico = 0;
-	    	            	}
-	    	        	}
-	        			//System.out.println("Pronostico:" + unPronostico + " -- Dif Goles:" + difGoles );
-	    				if( ((difGoles > 0  ) && (unPronostico == 1)) || 
-	    					((difGoles == 0 ) && (unPronostico == 0)) ||
-	    					((difGoles < 0  ) && (unPronostico == 2)) ){
-	    					puntosRonda++;
-	    				}
-	    			}
+	        		puntosRonda = puntosRonda + pron.puntosObtenidosDelPartido(resultadoPartido);
 	    			rondaApostador.put(resultadoPartido.getRonda(), puntosRonda);
 	    			unApostador.setResultadosPorRonda(rondaApostador);
 	    			apostadoresRondas.put(pron.getApostador(), unApostador);
@@ -190,7 +167,7 @@ public class Apuesta {
 
 	    	while (new_Iterator.hasNext()) {
 	    		HashMap.Entry<String, Apostador> new_Map = (HashMap.Entry<String, Apostador>) new_Iterator.next();
-	    		puntosRonda = new_Map.getValue().verPuntosPorRonda();
+	    		puntosRonda = new_Map.getValue().verPuntosPorRonda(); // Mostramos los puntos de cada uno por ronda y total de aciertos
 	    		if (puntosGanador < puntosRonda) {
 	    			puntosGanador = puntosRonda;
 	    			nombreGanadores.removeAll(nombreGanadores);
@@ -205,23 +182,17 @@ public class Apuesta {
 	    		System.out.println("----- GANADORES DE LOS PRONOSTICOS -----");
 	    		for(String unNombre: nombreGanadores) {
 	    			System.out.println("------     " + unNombre  +  "    --------");
-	    			if (resultadoApuesta != "")
-	    				resultadoApuesta = resultadoApuesta + " - ";
-	    			resultadoApuesta = resultadoApuesta + unNombre;
 	    		}
 	    		System.out.println("----------------------------------------");
 	    		System.out.println("----------------------------------------");
-	    		resultadoApuesta = "GANADOR/ES: " + resultadoApuesta + ". Puntos=" + puntosGanador; 
 	    	}else {
-	    		resultadoApuesta = "NO HUBO GANADORES";
-	    		System.out.println(resultadoApuesta);
+	    		System.out.println("NO HUBO GANADORES");
 	    	}
 	    	
 			
 		} catch (FaltaListadoException e) {
 			System.out.println(e.getMensaje());
         } ;
-    	return resultadoApuesta;
     }
     
     

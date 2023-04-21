@@ -49,6 +49,21 @@ public class Resultado {
 	}
 	public void setGolesEquipo2(int golesEquipo2) {
 		this.golesEquipo2 = golesEquipo2;
-	}	
-
+	}
+	
+	public String EquipoGanador() {
+		String equipo = "";
+		if (this.getGolesEquipo1() > this.getGolesEquipo2()) {
+			equipo = this.getEquipo1();
+		} else {
+			if (this.getGolesEquipo1() < this.getGolesEquipo2()) {
+				equipo = this.getEquipo2();
+			} else {
+				equipo = "EMPATE";
+			}
+			
+		}
+		
+		return equipo; 
+	}
 }

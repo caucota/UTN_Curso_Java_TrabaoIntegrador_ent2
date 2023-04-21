@@ -9,7 +9,6 @@ public class FaltaListadoException extends Exception {
 		if (tipoListado == 1) {
 			nombreListado = "Resultados";
 			metodoArmaListado = "armarListadoResultados";
-			metodoArmaListado = "armarListadoPronosticos";
 		}
 		if (tipoListado == 2) {
 			nombreListado = "Pronosticos";

@@ -47,7 +47,7 @@ public class Apostador {
 		}
 		//System.out.println("--------------------------------");
 		System.out.println("                                  ");
-		System.out.println("Puntos Totales :" + puntos);
+		System.out.println("Puntos Totales y/o Aciertos :" + puntos);
 		System.out.println("--------------------------------");
 		return puntos;
 	}
