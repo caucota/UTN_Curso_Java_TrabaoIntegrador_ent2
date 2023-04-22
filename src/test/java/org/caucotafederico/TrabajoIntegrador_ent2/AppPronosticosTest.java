@@ -9,14 +9,12 @@ import java.util.List;
 import org.caucotafederico.exceptions.FaltaListadoException;
 import org.caucotafederico.exceptions.NroColumnasInvalidoException;
 import org.caucotafederico.exceptions.NroNoEnteroException;
-import org.caucotafederico.models.Apostador;
 import org.caucotafederico.models.Apuesta;
 import org.caucotafederico.models.Pronostico;
 import org.caucotafederico.models.Resultado;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 public class AppPronosticosTest {
 
 	@Test
