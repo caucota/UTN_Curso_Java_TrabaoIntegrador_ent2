@@ -157,8 +157,6 @@ public class Apuesta {
 		int puntosGanador = 0;
 		
 		Integer puntosRonda = 0;
-		HashMap<Integer, Integer> rondaApostador = new HashMap<Integer, Integer>();
-		
 		if (apostadores != null) {
 			
 			Iterator<Entry<String, Apostador> > new_Iterator = apostadores.entrySet().iterator();

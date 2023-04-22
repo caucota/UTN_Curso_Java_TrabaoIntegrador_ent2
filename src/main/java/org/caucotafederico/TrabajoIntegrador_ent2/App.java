@@ -1,18 +1,9 @@
 package org.caucotafederico.TrabajoIntegrador_ent2;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
 
 import org.caucotafederico.exceptions.FaltaListadoException;
 import org.caucotafederico.exceptions.NroColumnasInvalidoException;
 import org.caucotafederico.exceptions.NroNoEnteroException;
-import org.caucotafederico.models.Apostador;
 import org.caucotafederico.models.Apuesta;
-import org.caucotafederico.models.Pronostico;
-import org.caucotafederico.models.Resultado;
 
 
 
