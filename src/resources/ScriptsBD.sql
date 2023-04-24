@@ -1,3 +1,15 @@
+CREATE DATABASE apuesta;
+CREATE TABLE pronostico (
+  id int NOT NULL AUTO_INCREMENT,
+  apostador varchar(45) NOT NULL,
+  equipo_local varchar(45) NOT NULL,
+  equipo_visitante varchar(45) NOT NULL,
+  local varchar(1) DEFAULT NULL,
+  empate varchar(1) DEFAULT NULL,
+  visitant` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 INSERT INTO apuesta.pronostico (apostador, equipo_local, equipo_visitante, local, empate, visitante)
