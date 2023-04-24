@@ -5,11 +5,11 @@ import java.util.HashMap;
 
 public class Apostador {
 	private String nombre;
-	private HashMap<Integer, Integer> resultadosPorRonda;
+	private HashMap<Integer, Integer> aciertosPorRonda;
 	
 	public Apostador(String nombre) {
 		this.nombre = nombre;
-		this.resultadosPorRonda = new HashMap<Integer, Integer>();
+		this.aciertosPorRonda = new HashMap<Integer, Integer>();
 	}
 	
 	public final String getNombre() {
@@ -18,36 +18,85 @@ public class Apostador {
 	public final void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public final HashMap<Integer, Integer> getResultadosPorRonda() {
-		return resultadosPorRonda;
+	public final HashMap<Integer, Integer> getAciertosPorRonda() {
+		return aciertosPorRonda;
 	}
-	public final void setResultadosPorRonda(HashMap<Integer, Integer> resultadosPorRonda) {
-		this.resultadosPorRonda = resultadosPorRonda;
+	public final void setAciertosPorRonda(HashMap<Integer, Integer> aciertosPorRonda) {
+		this.aciertosPorRonda = aciertosPorRonda;
 	}
 	
-	public int puntosTotales() {
+	public int puntosTotales(Puntaje puntajes, HashMap<Integer, Integer> aciertosMaxPorRonda, int aciertosMaxPorFase)  {
+		Integer cantAciertosRonda = 0;
+		int puntosDeLaRonda = 0;
 		int puntos = 0;
-		Collection<Integer> rondasApost = this.resultadosPorRonda.keySet();
+		Collection<Integer> rondasApost = this.aciertosPorRonda.keySet();
 		for(int ronda : rondasApost ) {
-			puntos = puntos + this.resultadosPorRonda.get(ronda);
+			cantAciertosRonda = this.aciertosPorRonda.get(ronda);
+			if (cantAciertosRonda == null) {
+				cantAciertosRonda = 0;
+			}
+			puntosDeLaRonda = puntosDeLaRonda + cantAciertosRonda * puntajes.getPuntosPorAcierto();
+			if (puntosDeLaRonda == aciertosMaxPorRonda.get(ronda)) {
+				puntosDeLaRonda = puntosDeLaRonda + puntajes.getPuntosExtrasPorRondaCompleta();
+			}
+			puntos = puntos + puntosDeLaRonda;
+			puntosDeLaRonda = 0;
 		}
+		if(aciertosMaxPorFase <= this.cantidadAciertos()) {
+			puntos = puntos + puntajes.getPuntosExtrasPorFaseCompleta();
+		}
+			
 		return puntos;
 	}
 	
-	public int verPuntosPorRonda() {
+	public int cantidadAciertos() {
+		Integer cantAciertosRonda = 0;
+		int cantTotal = 0;
+		Collection<Integer> rondasApost = this.aciertosPorRonda.keySet();
+		for(int ronda : rondasApost ) {
+			cantAciertosRonda = this.aciertosPorRonda.get(ronda);
+			if (cantAciertosRonda == null) {
+				cantAciertosRonda = 0;
+			}
+			cantTotal = cantTotal + cantAciertosRonda;
+		}
+		return cantTotal;
+	}
+	
+	public int listarPuntosPorRonda(Puntaje puntajes, HashMap<Integer, Integer> aciertosMaxPorRonda)  {
 		int puntos = 0;
+		Integer aciertoDeLaRonda = 0;
+		int cantAciertosTotales = 0;
+		int puntosDeLaRonda = 0;
+		int puntosAdicionalesRonda = 0;
 		System.out.println("--------------------------------");
 		System.out.println(this.nombre);
 		//System.out.println("--------------------------------");
-		Collection<Integer> rondasApost = this.resultadosPorRonda.keySet();
+		Collection<Integer> rondasApost = this.aciertosPorRonda.keySet();
 		for(int ronda : rondasApost ) {
-			puntos = puntos + this.resultadosPorRonda.get(ronda);
+			puntosAdicionalesRonda = 0;
+			aciertoDeLaRonda = this.aciertosPorRonda.get(ronda);
+			if (aciertoDeLaRonda == null) {
+				aciertoDeLaRonda = 0;
+			}
+			puntosDeLaRonda = aciertoDeLaRonda * puntajes.getPuntosPorAcierto();
+			
+			puntos = puntos + puntosDeLaRonda;
+			if (aciertoDeLaRonda == aciertosMaxPorRonda.get(ronda)) {
+				puntosAdicionalesRonda = puntajes.getPuntosExtrasPorRondaCompleta();
+			}
+			cantAciertosTotales = cantAciertosTotales + aciertoDeLaRonda;
 			//System.out.println("Ronda " + ronda +  " --> " + resultadosPorRonda);
-			System.out.println("Ronda " + ronda +  " --> " +  this.resultadosPorRonda.get(ronda));
+			System.out.println("Ronda " + ronda +  " - puntos --> " +  puntosDeLaRonda);
+			if (puntosAdicionalesRonda > 0) {
+				System.out.println("Ronda " + ronda +  " - Ptos.Adic.--> " +  puntosAdicionalesRonda);
+				puntos = puntos + puntosAdicionalesRonda;
+			}
 		}
 		//System.out.println("--------------------------------");
 		System.out.println("                                  ");
-		System.out.println("Puntos Totales y/o Aciertos :" + puntos);
+		System.out.println("Aciertos Totales :" + cantAciertosTotales);
+		System.out.println("Puntos Totales   :" + puntos);
 		System.out.println("--------------------------------");
 		return puntos;
 	}

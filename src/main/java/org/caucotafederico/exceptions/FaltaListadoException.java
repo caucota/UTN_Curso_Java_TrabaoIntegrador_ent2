@@ -1,8 +1,9 @@
 package org.caucotafederico.exceptions;
 
+@SuppressWarnings("serial")
 public class FaltaListadoException extends Exception {
-	private static String mensaje = null;
-	
+	private String mensaje = null;
+
 	public FaltaListadoException(int tipoListado) {
 		String nombreListado = "";
 		String metodoArmaListado = "";
@@ -14,8 +15,9 @@ public class FaltaListadoException extends Exception {
 			nombreListado = "Pronosticos";
 			metodoArmaListado = "armarListadoPronosticos";
 		}
-		this.mensaje = "Aun no se ha definido el listado de " + nombreListado + ". Proporcione el Archivo Correspondiente utilizando el método \"" + metodoArmaListado + "\" ";
-		
+		this.mensaje = "Aun no se ha definido el listado de " + nombreListado
+				+ ". Proporcione el Archivo Correspondiente utilizando el método \"" + metodoArmaListado + "\" ";
+
 	}
 
 	public String getMensaje() {

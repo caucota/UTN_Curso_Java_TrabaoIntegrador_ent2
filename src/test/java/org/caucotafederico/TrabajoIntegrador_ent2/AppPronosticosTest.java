@@ -6,9 +6,6 @@ package org.caucotafederico.TrabajoIntegrador_ent2;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.caucotafederico.exceptions.FaltaListadoException;
-import org.caucotafederico.exceptions.NroColumnasInvalidoException;
-import org.caucotafederico.exceptions.NroNoEnteroException;
 import org.caucotafederico.models.Apuesta;
 import org.caucotafederico.models.Pronostico;
 import org.caucotafederico.models.Resultado;
@@ -43,7 +40,7 @@ public class AppPronosticosTest {
 	}
 	
 	@Test
-	public void test_GetPuntosDeUnPronosticoDeUnPartido() {
+	public void test_GetAciertoDeUnPartudidoDeUnPronostico() {
 		Pronostico pronosticoUnPartido = new Pronostico();
 		pronosticoUnPartido.setEquipo1("Brasil");
 		pronosticoUnPartido.setEquipo2("España");
@@ -57,7 +54,7 @@ public class AppPronosticosTest {
 		resultadoUnPartido.setGolesEquipo1(2);
 		resultadoUnPartido.setGolesEquipo2(2);
 
-		assertEquals(1, pronosticoUnPartido.puntosObtenidosDelPartido(resultadoUnPartido));
+		assertEquals(1, pronosticoUnPartido.aciertoDelPartido(resultadoUnPartido));
 		
 	}
 	
@@ -120,12 +117,14 @@ public class AppPronosticosTest {
 		
 		
 		
-        Apuesta apuestaProde = new Apuesta();
+        Apuesta apuestaProde = new Apuesta(1,1,1);
         apuestaProde.setListadoResultados(listaResultados);
         apuestaProde.setListadoPronosticos(listaPronosticos);
+        apuestaProde.calcularAciertosCadaApostador();
+        assertEquals(4, apuestaProde.totalPuntosUnApostador("Mariana"));
         
         
-        
+        /*
         String archivoResultados = "src\\resources\\resultados.csv";
         String archivoPronostico = "src\\resources\\pronostico.csv";
         
@@ -142,7 +141,7 @@ public class AppPronosticosTest {
 			e2.printStackTrace();
 		}
 		
-		
+        */
 		
 	}
 	

@@ -116,14 +116,14 @@ public class Pronostico {
 		return equipo; 
 	}
 	
-	public int puntosObtenidosDelPartido(Resultado unResultado) {
-		int puntos = 0;
+	public int aciertoDelPartido(Resultado unResultado) {
+		int acierto = 0;
 		if (this.equipo1.equalsIgnoreCase(unResultado.getEquipo1()) && this.equipo2.equalsIgnoreCase(unResultado.getEquipo2())) {
 			if (this.EquipoGanador().equalsIgnoreCase(unResultado.EquipoGanador())) {
-				puntos ++;
+				acierto = 1;
 			}
 			
 		}
-		return puntos;
+		return acierto;
 	}
 }
