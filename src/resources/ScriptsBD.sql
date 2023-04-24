@@ -6,9 +6,9 @@ CREATE TABLE pronostico (
   equipo_visitante varchar(45) NOT NULL,
   local varchar(1) DEFAULT NULL,
   empate varchar(1) DEFAULT NULL,
-  visitant` varchar(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
+  visitante varchar(1) DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY id_UNIQUE (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 

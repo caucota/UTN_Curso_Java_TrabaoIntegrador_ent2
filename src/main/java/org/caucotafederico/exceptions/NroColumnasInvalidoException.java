@@ -1,5 +1,6 @@
 package org.caucotafederico.exceptions;
 
+@SuppressWarnings("serial")
 public class NroColumnasInvalidoException extends Exception {
 	private final String mensaje;
 

@@ -1,13 +1,7 @@
-{
-	"conexionBD": {
-					"jdbc_Driver":"com.mysql.cj.jdbc.Driver",
-					"db_Url":"jdbc:mysql://localhost:3306/apuesta",
-					"usuario":"root",
-					"clave":"root"					
-				  }
-	"puntosConfig":{
-					"puntosAcierto":1,
-					"puntosExtrasRondaCompleta":1,
-					"puntosExtrasFaseCompleta":1
-				   }		
-}
+jdbc_Driver=com.mysql.cj.jdbc.Driver
+db_Url=jdbc:mysql://localhost:3306/apuesta
+usuario=root
+clave=Testing2018
+puntosAcierto=1
+puntosExtrasRondaCompleta=1
+puntosExtrasFaseCompleta=1

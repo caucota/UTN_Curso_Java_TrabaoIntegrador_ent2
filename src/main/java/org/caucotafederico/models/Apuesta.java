@@ -152,11 +152,11 @@ public class Apuesta {
     	
     }
     
-    public void armarListadoPronosticosDesdeBD() throws ClassNotFoundException, SQLException, FaltanDatosBDPronosticos {
+    public void armarListadoPronosticosDesdeBD(ConectorSQL datosConexionBD) throws ClassNotFoundException, SQLException, FaltanDatosBDPronosticos {
         Connection con = null;
-			Class.forName(ConectorSQL.JDBC_DRIVER);
+			Class.forName(datosConexionBD.getJdbc_Driver());
     		//abrir la conexion
-			con = DriverManager.getConnection(ConectorSQL.DB_URL, ConectorSQL.USUARIO, ConectorSQL.CLAVE);
+			con = DriverManager.getConnection(datosConexionBD.getDb_Url(), datosConexionBD.getUsuario(), datosConexionBD.getClave());
     		 
     		//Ejecutar la conexion
     		Statement consulta;
@@ -166,7 +166,7 @@ public class Apuesta {
 			rs = consulta.executeQuery("SELECT * FROM pronostico ORDER BY id");
 			
 			while (rs.next()){
-				System.out.println(rs.getString(2));
+				//System.out.println(rs.getString(2));
 	    		Pronostico unPronostico = new Pronostico();
 	    		unPronostico.setApostador(rs.getString(2) );
 	    		unPronostico.setEquipo1(rs.getString(3).trim().toUpperCase());

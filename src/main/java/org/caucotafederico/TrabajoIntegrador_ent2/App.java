@@ -1,28 +1,15 @@
 package org.caucotafederico.TrabajoIntegrador_ent2;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
+import org.caucotafederico.exceptions.FaltaArchivoDeConfiguracion;
 import org.caucotafederico.exceptions.FaltaListadoException;
 import org.caucotafederico.exceptions.NroColumnasInvalidoException;
 import org.caucotafederico.exceptions.NroNoEnteroException;
 import org.caucotafederico.models.Apuesta;
-import org.caucotafederico.models.Pronostico;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.caucotafederico.models.ArchivoConfiguracion;
-import org.caucotafederico.conexion.ConectorSQL;
-import org.caucotafederico.exceptions.FaltanDatosBDPronosticos;
+import org.caucotafederico.exceptions.FaltanDatosConexionBD;
+import org.caucotafederico.exceptions.FaltanDatosDePuntajes;
 
 public class App 
 {
@@ -43,58 +30,33 @@ public class App
         	}
         		
         }
-        ArchivoConfiguracion archConfig = leerArchivoConfiguracion(rutaarchivoConfiguracion);
-        if (archConfig != null) {
-        	Apuesta apuestaProde = new Apuesta(archConfig.getPuntajesApuestas().getPuntosPorAcierto(), archConfig.getPuntajesApuestas().getPuntosExtrasPorRondaCompleta(), archConfig.getPuntajesApuestas().getPuntosExtrasPorFaseCompleta());
-        	//Apuesta apuestaProde = new Apuesta(1, 1, 1);
+        ArchivoConfiguracion archConfig = new ArchivoConfiguracion();
         	
-	        try {
-	        	apuestaProde.armarListadoResultados(archivoResultados);
-            	apuestaProde.armarListadoPronosticosDesdeBD();
-	        	apuestaProde.calcularAciertosCadaApostador();
-				apuestaProde.verResultadosPorApostadoryRonda();
-	        } catch (NroColumnasInvalidoException e) {
-	        	System.out.println(e.getMensaje());
-	        } catch (NroNoEnteroException e) {
-	        	System.out.println(e.getMensaje());
-	        } catch (FaltaListadoException e) {
-	        	System.out.println(e.getMensaje());
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			} 
-			
-    		
+        try {
+			archConfig.LeerArchivoDeConfiguracion(rutaarchivoConfiguracion);
+        	Apuesta apuestaProde = new Apuesta(archConfig.getPuntajesApuestas().getPuntosPorAcierto(), archConfig.getPuntajesApuestas().getPuntosExtrasPorRondaCompleta(), archConfig.getPuntajesApuestas().getPuntosExtrasPorFaseCompleta());
+        	
+        	apuestaProde.armarListadoResultados(archivoResultados);
+        	apuestaProde.armarListadoPronosticosDesdeBD(archConfig.getDatosConexionBD());
+        	apuestaProde.calcularAciertosCadaApostador();
+			apuestaProde.verResultadosPorApostadoryRonda();
+        } catch (NroColumnasInvalidoException e) {
+        	System.out.println(e.getMensaje());
+        } catch (NroNoEnteroException e) {
+        	System.out.println(e.getMensaje());
+        } catch (FaltaListadoException e) {
+        	System.out.println(e.getMensaje());
+		} catch (FaltanDatosConexionBD | FaltanDatosDePuntajes | FaltaArchivoDeConfiguracion e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			System.out.println(e1.getMessage());
+		} catch (Exception e2) {
+        	System.out.println(e2.getMessage());
+			e2.printStackTrace();
 		}
-
        
     }
     
-	public static ArchivoConfiguracion leerArchivoConfiguracion(String rutaArchivoConfiguracion) {
-		
-		String linea ;
-		String json = "";
-		BufferedReader lector;
-		ArchivoConfiguracion archivoLeido;
-		Object objectMapper = new ObjectMapper();
-		try {
-			lector = new BufferedReader(new FileReader(rutaArchivoConfiguracion));
-			while((linea = lector.readLine())!=null) {//Este es un bucle que se repetirá mientras haya líneas por leer en el archivo.
-				json = json + linea;
-			}
-			
-			ArchivoConfiguracion archivoLeido = objectMapper.readValue(json, ArchivoConfiguracion.class);
-			//System.out.println(archivoLeido);
-
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return archivoLeido;
-	}
 
 
 }
